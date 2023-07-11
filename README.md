@@ -1,6 +1,12 @@
 # Randy-API
 Randy API is an API that build for myself Randy. This features anonymous message, about me, etc (idk, if i've any ideas i will add it). 
-
+|---|---|
+|R|Random|
+|A|Access|
+|N|Nerd|
+|D|Database|
+|Y|iYohohohoho|
+|---|---|
 
 It will includes `GET` & `POST` method
 |URL|METHOD|
