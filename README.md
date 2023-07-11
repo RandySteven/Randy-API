@@ -15,6 +15,11 @@ It will includes `GET` & `POST` method
 |`{{url}}/v1.0/randy-api/`|`GET`|
 |`{{url}}/v1.0/randy-api/messages/add-message`|`POST`|
 |`{{url}}/v1.0/randy-api/messages/`|`GET`|
+|`{{url}}/v1.0/randy-api/karaokes/`|`GET`|
+
+
+### Messages Services
+#### TBA
 
 Sample Request of POST message
 ```
@@ -50,3 +55,6 @@ Sample Response of GET messages
 
 }
 ```
+
+### Karaoke Services
+#### TBA
