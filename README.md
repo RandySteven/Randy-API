@@ -2,9 +2,9 @@
 Randy API is an API that build for myself Randy. This features anonymous message, about me, etc (idk, if i've any ideas i will add it). 
 
 It will includes `GET` & `POST` method
-`{{url}}/v1.0/randy-api/` => `GET`
-`{{url}}/v1.0/randy-api/messages/add-message` => `POST`
-`{{url}}/v1.0/randy-api/messages/` => `GET`
+- `{{url}}/v1.0/randy-api/` => `GET`
+- `{{url}}/v1.0/randy-api/messages/add-message` => `POST`
+- `{{url}}/v1.0/randy-api/messages/` => `GET`
 
 Sample Request of POST message
 ```
