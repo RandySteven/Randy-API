@@ -1,4 +1,8 @@
 #bg_about{
+    background-image: url('../frontend/images/bg_about.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 #bg_index{
@@ -84,4 +88,5 @@
     grid-column: 1/2;
 }
 
-#bg_message{}
+#bg_message{
+}

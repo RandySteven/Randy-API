@@ -17,30 +17,45 @@
                 <form class="form_billing">
                     <div class="grid_2">
                         <div class="item_2 grid_2">
-                            <button type="button" class="mx-2 my-2">Personal</button>
-                            <button type="button" class="mx-2 my-2">Game</button>
-                            <button type="button" class="mx-2 my-2">Member</button>
-                            <button type="button" class="mx-2 my-2">Admin##</button>
-                            <button type="button" class="mx-2 my-2">Group</button>
-                            <button type="button" class="mx-2 my-2">Paket</button>
-                            <button type="button" class="mx-2 my-2">Pre-Paid</button>
+                            <button type="button" class="mx-2 my-2"><u>P</u>ersonal</button>
+                            <button type="button" disabled class="mx-2 my-2"><u>G</u>roup</button>
+                            <button type="button" disabled class="mx-2 my-2">Gam<u>e</u></button>
+                            <button type="button" disabled class="mx-2 my-2">Pake<u>t</u></button>
+                            <button type="button" disabled class="mx-2 my-2"><u>M</u>ember</button>
+                            <button type="button" disabled class="mx-2 my-2">Pr<u>e</u>-Paid</button>
+                            <button type="button" class="mx-2 my-2"><u>A</u>dmin##</button>
                             <button type="button" class="mx-2 my-2">Panduan</button>
                         </div>
                         <div class="grid_1  text_black">
                             <div>WS</div>
                             Time Warning
-                            <div class="group_radio">
-                                <input type="radio" name="" id="billing">Tidak(No)
-                            </div>
-                            <div class="group_radio">
-                                <input type="radio" name="" id="billing">Menit 30
-                            </div>
-                            <div class="group_radio">
-                                <input type="radio" name="" id="billing">Menit 50
-                            </div>
-                            <div class="group_radio">
-                                <input type="radio" name="" id="billing">Menit 45
-                            </div>
+                            <form action="">
+                                <div class="group_radio grid_2">
+                                    <input type="radio" name="billing" id="no">
+                                    <span id="no">
+                                        Tidak(No)
+                                    </span>
+                                </div>
+                                <div class="group_radio grid_2">
+                                    <input type="radio" name="billing" id="menit_30">
+                                    <span id="menit_30">
+                                        Menit 30
+                                    </span>
+                                </div>
+                                <div class="group_radio grid_2">
+                                    <input type="radio" name="billing" id="menit_50">
+                                    <span id="menit_50">
+                                        Menit 50
+                                    </span>
+                                </div>
+                                <div class="group_radio grid_2">
+                                    <input type="radio" name="billing" id="menit_45">
+                                    <span id="menit_45">
+                                        Menit 45
+                                    </span> 
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </form>
