@@ -1,0 +1,1 @@
+console.log('FCK JS I HATE U BTCH')
