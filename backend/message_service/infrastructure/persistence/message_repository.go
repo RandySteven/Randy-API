@@ -1,7 +1,9 @@
 package persistence
 
 import (
+	"github.com/icrowley/fake"
 	"github.com/jinzhu/gorm"
+	"log"
 	"message_service/domain/entity"
 	"message_service/domain/repository"
 )
@@ -16,10 +18,15 @@ func NewMessageRepository(db *gorm.DB) *MessageRepo {
 	}
 }
 
-var _ repository.MesssageRepository = &MessageRepo{}
+var _ repository.MessageRepository = &MessageRepo{}
 
 func (m *MessageRepo) AddMessage(message *entity.Message) (messageId string, err error) {
-	err = m.db.Debug().Create(&message).Error
+	log.Println(fake.GetLangs())
+	fake.SetLang("en")
+	if message.Message == "" {
+		message.Message = fake.Words()
+	}
+	err = m.db.Create(message).Error
 	if err != nil {
 		return "Error pas masukin message", err
 	}

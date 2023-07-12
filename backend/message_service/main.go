@@ -11,11 +11,17 @@ import (
 	"os"
 )
 
+/**
+Main function to run the application
+*/
 func main() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+	/**
+	Set the App & DB Configuration
+	*/
 	app_mode := os.Getenv("APP_ENV")
 	dbdriver := os.Getenv("DB_DRIVER")
 	host := os.Getenv("DB_HOST")

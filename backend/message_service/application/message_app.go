@@ -6,7 +6,7 @@ import (
 )
 
 type messageApp struct {
-	mr repository.MesssageRepository
+	mr repository.MessageRepository
 }
 
 func (m *messageApp) AddMessage(message *entity.Message) (messageId string, err error) {

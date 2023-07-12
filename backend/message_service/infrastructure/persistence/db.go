@@ -9,7 +9,7 @@ import (
 )
 
 type Repositories struct {
-	Message repository.MesssageRepository
+	Message repository.MessageRepository
 	db      *gorm.DB
 }
 
