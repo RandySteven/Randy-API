@@ -19,7 +19,6 @@ func NewMessageRepository(db *gorm.DB) *MessageRepo {
 var _ repository.MesssageRepository = &MessageRepo{}
 
 func (m *MessageRepo) AddMessage(message *entity.Message) (messageId string, err error) {
-	//TODO implement me
 	err = m.db.Debug().Create(&message).Error
 	if err != nil {
 		return "Error pas masukin message", err
@@ -27,12 +26,10 @@ func (m *MessageRepo) AddMessage(message *entity.Message) (messageId string, err
 	return message.MessageId, nil
 }
 
-func (m *MessageRepo) GetAllMessages() (messages *[]entity.Message) {
-	//TODO implement me
-	panic("implement me")
-	err := m.db.Debug().Order("createdAt").Find(&messages).Error
+func (m *MessageRepo) GetAllMessages() (messages *[]entity.Message, err error) {
+	err = m.db.Debug().Table("messages").Find(messages).Error
 	if err != nil {
-		return messages
+		return nil, err
 	}
-	return messages
+	return messages, err
 }
