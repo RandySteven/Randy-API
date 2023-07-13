@@ -11,14 +11,20 @@ import (
 	"os"
 )
 
+func init() {
+
+}
+
 /**
 Main function to run the application
 */
 func main() {
+
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+
 	/**
 	Set the App & DB Configuration
 	*/
