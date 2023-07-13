@@ -2,18 +2,19 @@ package persistence
 
 import (
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"message_service/domain/entity"
 	"message_service/domain/repository"
 )
 
 type Repositories struct {
-	Message repository.MesssageRepository
+	Message repository.MessageRepository
 	db      *gorm.DB
 }
 
 func NewRepositories(DbDriver, DbUser, DbPassword, DbPort, DbHost, DbName string) (*Repositories, error) {
-	DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", DbHost, DbPort, DbUser, DbName, DbPassword)
+	DBURL := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", DbUser, DbPassword, DbHost, DbPort, DbName)
 	db, err := gorm.Open(DbDriver, DBURL)
 	if err != nil {
 		return nil, err
