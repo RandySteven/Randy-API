@@ -10,12 +10,12 @@ type Response struct {
 
 var OK *Response = &Response{
 	200,
-	"OK",
+	"Lihatlah semua isi hati orang-orang",
 }
 
 var POST *Response = &Response{
 	201,
-	"Created",
+	"isi hati anda sudah tersampaikan",
 }
 
 var BAD_REQUEST *Response = &Response{
@@ -25,7 +25,7 @@ var BAD_REQUEST *Response = &Response{
 
 var NOT_FOUND *Response = &Response{
 	404,
-	"Not Found",
+	"Isi hati seseorang tidak ditemukan",
 }
 
 var GENERAL_ERROR *Response = &Response{
