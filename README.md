@@ -12,10 +12,10 @@ Randy API is an API that build for myself Randy. This features anonymous message
 It will includes `GET` & `POST` method
 |URL|METHOD|
 |---|----|
-|`{{url}}/v1.0/randy-api/`|`GET`|
-|`{{url}}/v1.0/randy-api/messages/add-message`|`POST`|
-|`{{url}}/v1.0/randy-api/messages/`|`GET`|
-|`{{url}}/v1.0/randy-api/karaokes/`|`GET`|
+|`{{url}}/randy-api/v1.0/`|`GET`|
+|`{{url}}/randy-api/v1.0/messages/add-message`|`POST`|
+|`{{url}}/randy-api/v1.0/messages/`|`GET`|
+|`{{url}}/randy-api/v1.0/karaokes/`|`GET`|
 
 
 ### Messages Services
