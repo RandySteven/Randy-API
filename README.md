@@ -57,4 +57,4 @@ Sample Response of GET messages
 ```
 
 ### Karaoke Services
-#### TBA
+<p>Karaoke services is where you can put your own songs that you want to sing</p>
