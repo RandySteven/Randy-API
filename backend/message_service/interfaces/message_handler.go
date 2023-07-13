@@ -23,7 +23,7 @@ func NewMessage(messageApp application.MessageAppInterface) *Message {
 func (m *Message) AddMessage(c *gin.Context) {
 	var message entity.Message
 	var rh utils.ResponseHandler
-	status, errDetail := false, map[string]string{}
+	status := false
 	messageId, err := m.messageApp.AddMessage(&message)
 	if err != nil {
 		return
@@ -33,20 +33,19 @@ func (m *Message) AddMessage(c *gin.Context) {
 	responseMessage := make(map[string]interface{})
 	responseMessage["messageId"] = messageId
 	responseMessage["message"] = message
-	rh.ResponseEncoder(c, http.StatusCreated, status, errDetail, "responseMessage", responseMessage)
+	rh.ResponseEncoder(c, http.StatusCreated, status, "responseMessage", responseMessage, enums.POST)
 }
 
 func (m *Message) GetAllMessages(c *gin.Context) {
 	var response *enums.Response = enums.OK
 	var rh utils.ResponseHandler
-	var messages *[]entity.Message
+	var messages entity.Messages
 	var err error
-	errDetail := map[string]string{}
 	success := true
 	log.Println(response)
 	messages, err = m.messageApp.GetAllMessages()
 	if err != nil {
 		return
 	}
-	rh.ResponseEncoder(c, http.StatusOK, success, errDetail, "messages", messages)
+	rh.ResponseEncoder(c, http.StatusOK, success, "messages", messages.PublicMessages(), response)
 }

@@ -33,10 +33,10 @@ func (m *MessageRepo) AddMessage(message *entity.Message) (messageId string, err
 	return message.MessageId, nil
 }
 
-func (m *MessageRepo) GetAllMessages() (messages *[]entity.Message, err error) {
-	err = m.db.Debug().Table("messages").Find(messages).Error
-	if err != nil {
-		return nil, err
+func (m *MessageRepo) GetAllMessages() (messages []entity.Message, err error) {
+	dbErr := m.db.Table("messages").Raw("SELECT message_id, message FROM messages").Scan(&messages)
+	if dbErr.Error != nil {
+		return nil, dbErr.Error
 	}
-	return messages, err
+	return messages, nil
 }
