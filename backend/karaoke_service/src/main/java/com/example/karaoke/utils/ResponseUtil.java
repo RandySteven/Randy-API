@@ -10,6 +10,12 @@ import java.util.Map;
 @Component
 public class ResponseUtil {
 
+    public ResponseUtil(){}
+
+    public static ResponseUtil getInstance(){
+        return new ResponseUtil();
+    }
+
     public JSONObject responseJSON(HttpStatus status, String dataName, Object dataItem, boolean success){
         Map<String, Object> responseMap = new HashMap<>();
         responseMap.put("responseCode", status.value());

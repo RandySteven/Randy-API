@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -22,8 +24,7 @@ public class GroupServiceImpl implements GroupService {
     @Autowired
     GroupRepository groupRepository;
 
-    @Autowired
-    SecurityUtil securityUtil;
+    SecurityUtil securityUtil = SecurityUtil.getInstance();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupServiceImpl.class);
 
@@ -43,17 +44,35 @@ public class GroupServiceImpl implements GroupService {
         );
         group.setCreatedAt(LocalDateTime.now());
         group.setDeletedAt(null);
-        Group postedGroup = groupRepository.insert(group);
+        Group postedGroup = groupRepository.save(group);
         return postedGroup.getGroupToken();
     }
 
     @Override
     public List<Group> getAllGroups() {
-        return null;
+        List<Group> groups = groupRepository.findAll();
+        return groups;
     }
 
     @Override
     public Group getGroupByGroupId(String groupId) {
+        List<Group> groups = getAllGroups();
+        int index = -1;
+        boolean search = false;
+        for(int i = 0 ; i < groups.size() ; i++){
+            if(groupId.equals(groups.get(i).getGroupId())){
+                index = i;
+                search = true;
+            }
+        }
+        if(search == true){
+            return groups.get(index);
+        }
+        return null;
+    }
+
+    @Override
+    public Group getGroupByGroupToken(String groupToken) {
         return null;
     }
 }

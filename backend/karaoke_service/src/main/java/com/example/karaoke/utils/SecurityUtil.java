@@ -9,6 +9,12 @@ import java.security.SecureRandom;
 @Component
 public class SecurityUtil {
 
+    public SecurityUtil(){}
+
+    public static SecurityUtil getInstance(){
+        return new SecurityUtil();
+    }
+
     public String groupAccessTokenEncryptionSHA512(String groupName, String groupPassword){
         String accessToken = "";
         int saltRange = 10;

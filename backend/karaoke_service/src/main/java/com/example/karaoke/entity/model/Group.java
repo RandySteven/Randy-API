@@ -1,16 +1,23 @@
 package com.example.karaoke.entity.model;
 
 import com.example.karaoke.entity.payload.response.dto.GroupDTO;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Document(collection = "groups")
+//@Document(collection = "groups")
+@Table(name = "groups")
+@Entity
 public class Group {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    @JdbcTypeCode(SqlTypes.BIGINT)
+    private Long id;
+
     private String groupId;
     private String groupName;
     private String groupPass;
@@ -20,14 +27,13 @@ public class Group {
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
-
     public String getGroupId() {
         return groupId;
     }
@@ -92,7 +98,7 @@ public class Group {
         this.deletedAt = deletedAt;
     }
 
-    public Group(String id, String groupId, String groupName, String groupPass, String groupToken, List<Song> songs, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public Group(Long id, String groupId, String groupName, String groupPass, String groupToken, List<Song> songs, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.groupId = groupId;
         this.groupName = groupName;

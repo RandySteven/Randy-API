@@ -8,13 +8,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 
-    @Bean
-    public SecurityUtil securityUtil(){
-        return new SecurityUtil();
-    }
+//    @Bean
+//    public SecurityUtil securityUtil(){
+//        return new SecurityUtil();
+//    }
 
-    @Bean
-    public ResponseUtil responseUtil(){
-        return new ResponseUtil();
-    }
+//    @Bean
+//    public ResponseUtil responseUtil(){
+//        return new ResponseUtil();
+//    }
 }
