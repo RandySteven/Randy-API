@@ -10,6 +10,6 @@ public class Song {
     private String groupAccessToken;
     private String adderName;
     private String link;
-    private Map<String, String> songLyric;
+    private Map<String, Lyric> songLyric;
     private SongStatus songStatus;
 }
