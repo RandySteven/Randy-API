@@ -7,6 +7,7 @@ import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 //@Document(collection = "groups")
 @Table(name = "groups")
@@ -22,7 +23,6 @@ public class Group {
     private String groupName;
     private String groupPass;
     private String groupToken;
-    private List<Song> songs;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
@@ -66,14 +66,6 @@ public class Group {
         this.groupToken = groupToken;
     }
 
-    public List<Song> getSongs() {
-        return songs;
-    }
-
-    public void setSongs(List<Song> songs) {
-        this.songs = songs;
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -98,13 +90,13 @@ public class Group {
         this.deletedAt = deletedAt;
     }
 
-    public Group(Long id, String groupId, String groupName, String groupPass, String groupToken, List<Song> songs, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public Group(Long id, String groupId, String groupName, String groupPass, String groupToken, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.groupId = groupId;
         this.groupName = groupName;
         this.groupPass = groupPass;
         this.groupToken = groupToken;
-        this.songs = songs;
+//        this.songs = songs;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
