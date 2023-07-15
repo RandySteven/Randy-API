@@ -15,21 +15,41 @@ public class SecurityUtil {
         return new SecurityUtil();
     }
 
+    public String groupAccessTokenEncryptionSHA512(String groupName){
+        String accessToken = "";
+        String pass = groupName;
+        int saltRange = 10;
+        byte []salt = new byte[saltRange];
+        try{
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(salt);
+            byte []hashedPassword = md.digest(pass.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0 ; i < hashedPassword.length ; i++){
+                sb.append(Integer.toString((hashedPassword[i] & 0xff) + 0x100, 16)).substring(1);
+            }
+            accessToken = sb.toString();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return accessToken;
+    }
+
     public String groupAccessTokenEncryptionSHA512(String groupName, String groupPassword){
         String accessToken = "";
-        int saltRange = 10;
-        String pass = groupName;
-        if(groupPassword == "" || groupPassword == null){
-            saltRange = groupPassword.length();
-            pass += groupPassword;
-        }
+        String pass = groupName + groupPassword;
+        int saltRange = groupPassword.length();
         SecureRandom secureRandom = new SecureRandom();
         byte []salt = new byte[saltRange];
         try{
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             md.update(salt);
             byte []hashedPassword = md.digest(pass.getBytes(StandardCharsets.UTF_8));
-            accessToken = hashedPassword.toString();
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0 ; i < hashedPassword.length ; i++){
+                sb.append(Integer.toString((hashedPassword[i] & 0xff) + 0x100, 16)).substring(1);
+            }
+            accessToken = sb.toString();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -43,7 +63,11 @@ public class SecurityUtil {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(salt);
             byte []hashedPassword = md.digest(groupPassword.getBytes(StandardCharsets.UTF_8));
-            hashedPasswordStr = hashedPassword.toString();
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0 ; i < hashedPassword.length ; i++){
+                sb.append(Integer.toString((hashedPassword[i] & 0xff) + 0x100, 16)).substring(1);
+            }
+            hashedPasswordStr = sb.toString();
         }catch (Exception e){
             e.printStackTrace();
         }

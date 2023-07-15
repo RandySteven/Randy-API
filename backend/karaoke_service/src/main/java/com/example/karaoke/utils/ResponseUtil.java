@@ -1,6 +1,8 @@
 package com.example.karaoke.utils;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +11,8 @@ import java.util.Map;
 
 @Component
 public class ResponseUtil {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ResponseUtil.class);
 
     public ResponseUtil(){}
 
@@ -23,6 +27,7 @@ public class ResponseUtil {
         responseMap.put("dataName", dataItem);
         responseMap.put("success", success);
         JSONObject response = new JSONObject(responseMap);
+        LOGGER.info("==== response : {}" , response);
         return response;
     }
 

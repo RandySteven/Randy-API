@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/randy-steven/v1.0/karaoke/groups/")
 public class GroupController {
@@ -29,13 +31,13 @@ public class GroupController {
 
     ResponseUtil responseUtil = ResponseUtil.getInstance();
 
-    ResponseEntity responseEntity;
+    ResponseEntity<Map<String, Object>> responseEntity;
 
     @PostMapping(ADD_GROUP_ENDPOINT)
     public ResponseEntity addNewGroup(@RequestBody GroupRequest groupRequest) {
         String groupAccessToken = groupService.addNewGroup(groupRequest);
         JSONObject response = responseUtil.responseJSON(HttpStatus.CREATED, "groupAccessToken", groupAccessToken, true);
-        responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(response);
+        responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(response.toMap());
         return responseEntity;
     }
 }
