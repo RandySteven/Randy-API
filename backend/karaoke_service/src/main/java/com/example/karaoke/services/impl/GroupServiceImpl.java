@@ -6,6 +6,7 @@ import com.example.karaoke.repository.GroupRepository;
 import com.example.karaoke.services.GroupService;
 import com.example.karaoke.utils.SecurityUtil;
 import com.example.karaoke.utils.VelocityUtil;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +31,24 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public String addNewGroup(GroupRequest groupRequest) {
+        LOGGER.info("=== Group Request : {}", JSONObject.wrap(groupRequest));
         Group group = new Group();
         group.setGroupId(vu.groupId());
         group.setGroupName(groupRequest.getGroupName());
         group.setGroupPass(
+                groupRequest.getGroupPassword() == null ?
+                        null :
                 securityUtil.groupPasswordEncryptionMD5(groupRequest.getGroupPassword())
         );
         group.setGroupToken(
+                groupRequest.getGroupPassword() != null ?
                 securityUtil.groupAccessTokenEncryptionSHA512(
                         groupRequest.getGroupName(),
                         groupRequest.getGroupPassword()
-                )
+                ) :
+                        securityUtil.groupAccessTokenEncryptionSHA512(
+                                groupRequest.getGroupName()
+                        )
         );
         group.setCreatedAt(LocalDateTime.now());
         group.setDeletedAt(null);
