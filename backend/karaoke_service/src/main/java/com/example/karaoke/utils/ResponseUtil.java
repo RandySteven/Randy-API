@@ -24,7 +24,7 @@ public class ResponseUtil {
         Map<String, Object> responseMap = new HashMap<>();
         responseMap.put("responseCode", status.value());
         responseMap.put("responseMessage", status.getReasonPhrase());
-        responseMap.put("dataName", dataItem);
+        responseMap.put(dataName, dataItem);
         responseMap.put("success", success);
         JSONObject response = new JSONObject(responseMap);
         LOGGER.info("==== response : {}" , response);

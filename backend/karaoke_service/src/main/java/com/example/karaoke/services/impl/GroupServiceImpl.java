@@ -81,6 +81,12 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group getGroupByGroupToken(String groupToken) {
+        List<Group> groups = getAllGroups();
+        for(int i = 0 ; i < groups.size() ; i++){
+            if(groupToken.equals(groups.get(i).getGroupToken())){
+                return groups.get(i);
+            }
+        }
         return null;
     }
 }
