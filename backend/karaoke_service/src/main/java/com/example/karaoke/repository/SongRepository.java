@@ -12,4 +12,5 @@ import java.util.List;
 public interface SongRepository extends MongoRepository<Song, String> {
     List<Song> findByGroupId(String groupId);
     List<Song> findByGroup(Group group);
+    Song findSongBySongId(String songId);
 }

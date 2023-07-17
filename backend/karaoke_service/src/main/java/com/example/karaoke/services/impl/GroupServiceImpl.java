@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class GroupServiceImpl implements GroupService {
@@ -32,8 +30,12 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public String addNewGroup(GroupRequest groupRequest) {
         LOGGER.info("=== Group Request : {}", JSONObject.wrap(groupRequest));
+        Map<String, Boolean> groupRequestValidation = securityUtil.groupRequestValidation(groupRequest);
         Group group = new Group();
         group.setGroupId(vu.groupId());
+        if(groupRequestValidation.get("groupName") == false){
+            return "";
+        }
         group.setGroupName(groupRequest.getGroupName());
         group.setGroupPass(
                 groupRequest.getGroupPassword() == null ?
@@ -64,19 +66,32 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group getGroupByGroupId(String groupId) {
-        List<Group> groups = getAllGroups();
-        int index = -1;
-        boolean search = false;
-        for(int i = 0 ; i < groups.size() ; i++){
-            if(groupId.equals(groups.get(i).getGroupId())){
-                index = i;
-                search = true;
-            }
+//        List<Group> groups = getAllGroups();
+//        int index = -1;
+//        boolean search = false;
+//        List<String> groupNames = new ArrayList<>();
+//
+//        for(int i = 0 ; i < groups.size() ; i++){
+//            groupNames.add(groups.get(i).getGroupName());
+//        }
+//        Arrays.sort(groupNames.toArray());
+//
+//        index = binarySearch(groupNames, groupId);
+
+        return groupRepository.findByGroupId(groupId);
+    }
+
+    private int binarySearch(List<String> groupNames, String groupId){
+
+        int l = 0, r = groupNames.size();
+        while(l <= r){
+            int m = l + (r - l)/2;
+            int res = groupId.compareTo(groupNames.get(m));
+            if(res == 0) return m;
+            if(res > 0) l = m + 1;
+            else if(res < 0) r = m - 1;
         }
-        if(search == true){
-            return groups.get(index);
-        }
-        return null;
+        return -1;
     }
 
     @Override
@@ -89,4 +104,5 @@ public class GroupServiceImpl implements GroupService {
         }
         return null;
     }
+
 }

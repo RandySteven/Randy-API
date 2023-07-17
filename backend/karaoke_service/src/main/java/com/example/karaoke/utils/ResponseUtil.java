@@ -1,5 +1,9 @@
 package com.example.karaoke.utils;
 
+import com.example.karaoke.entity.model.Song;
+import com.example.karaoke.entity.payload.response.GroupResponse;
+import com.example.karaoke.entity.payload.response.SongResponse;
+import com.example.karaoke.entity.payload.response.dto.GroupDTO;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -29,6 +34,14 @@ public class ResponseUtil {
         JSONObject response = new JSONObject(responseMap);
         LOGGER.info("==== response : {}" , response);
         return response;
+    }
+
+    public GroupResponse getGroupResponseDetail(String groupId, GroupDTO groupDTO, List<Song> songs){
+        GroupResponse groupResponse = new GroupResponse();
+        groupResponse.setGroupId(groupId);
+        groupResponse.setGroupName(groupDTO.getGroupName());
+        groupResponse.setSongs(Song.songResponses(songs));
+        return groupResponse;
     }
 
 }

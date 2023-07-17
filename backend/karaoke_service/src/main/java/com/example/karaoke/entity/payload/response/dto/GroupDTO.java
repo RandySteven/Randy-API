@@ -12,7 +12,22 @@ public class GroupDTO {
 
     public GroupDTO(Group group){
         this.groupName = group.getGroupName();
-        this.groupUrl = "http://localhost:8080/randy-api/v1.0/karaoke/groups/"+group.getGroupId();
+        this.groupUrl = "http://localhost:8080/randy-steven/v1.0/karaoke/groups/"+group.getGroupId();
     }
 
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public String getGroupUrl() {
+        return groupUrl;
+    }
+
+    public void setGroupUrl(String groupUrl) {
+        this.groupUrl = groupUrl;
+    }
 }

@@ -1,7 +1,9 @@
 package com.example.karaoke.services.impl;
 
 import com.example.karaoke.entity.model.Group;
+import com.example.karaoke.entity.model.Lyric;
 import com.example.karaoke.entity.model.Song;
+import com.example.karaoke.entity.payload.request.LyricRequest;
 import com.example.karaoke.entity.payload.request.SongRequest;
 import com.example.karaoke.enums.SongStatus;
 import com.example.karaoke.repository.GroupRepository;
@@ -16,7 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SongServiceImpl implements SongService {
@@ -68,5 +72,29 @@ public class SongServiceImpl implements SongService {
         song.setSongStatus(SongStatus.DONE);
         songRepository.save(song);
         return song;
+    }
+
+    @Override
+    public Song getSongBySongId(String songId) {
+        Song song = songRepository.findSongBySongId(songId);
+        return song;
+    }
+
+    @Override
+    public Song addLyricToSong(String songId, LyricRequest lyricRequest) {
+        Song song = getSongBySongId(songId);
+        Lyric lyric = new Lyric();
+        lyric.setLyricText(lyricRequest.getLyricText());
+        lyric.setCreatedAt(LocalDateTime.now());
+        if(song.getLyricMap() == null){
+            song.setLyricMap(new HashMap<String, Lyric>(){{
+                put(lyricRequest.getLanguage().getLanCode(), lyric);
+            }});
+        }else{
+            song.getLyricMap().put(lyricRequest.getLanguage().getLanCode(), lyric);
+        }
+
+        Song updateSong = songRepository.save(song);
+        return updateSong;
     }
 }

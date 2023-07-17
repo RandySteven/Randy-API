@@ -8,11 +8,11 @@ public class GroupResponse {
 
     private String groupId;
     private String groupName;
-    private List<Song> songs;
+    private List<SongResponse> songs;
 
     public GroupResponse() {}
 
-    public GroupResponse(String groupId, String groupName, List<Song> songs) {
+    public GroupResponse(String groupId, String groupName, List<SongResponse> songs) {
         this.groupId = groupId;
         this.groupName = groupName;
         this.songs = songs;
@@ -34,11 +34,11 @@ public class GroupResponse {
         this.groupName = groupName;
     }
 
-    public List<Song> getSongs() {
+    public List<SongResponse> getSongs() {
         return songs;
     }
 
-    public void setSongs(List<Song> songs) {
+    public void setSongs(List<SongResponse> songs) {
         this.songs = songs;
     }
 }

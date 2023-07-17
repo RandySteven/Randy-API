@@ -1,7 +1,5 @@
 package com.example.karaoke.entity.payload.request;
 
-import com.example.karaoke.entity.model.Lyric;
-
 import java.util.Map;
 
 public class SongRequest {
@@ -9,7 +7,6 @@ public class SongRequest {
     private String adderName;
     private String songName;
     private String link;
-    private Map<String, Lyric> lyricMap;
     private String groupToken;
 
     public String getAdderName() {
@@ -34,14 +31,6 @@ public class SongRequest {
 
     public void setLink(String link) {
         this.link = link;
-    }
-
-    public Map<String, Lyric> getLyricMap() {
-        return lyricMap;
-    }
-
-    public void setLyricMap(Map<String, Lyric> lyricMap) {
-        this.lyricMap = lyricMap;
     }
 
     public String getGroupToken() {

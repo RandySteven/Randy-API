@@ -1,10 +1,9 @@
 package com.example.karaoke.entity.model;
 
+import com.example.karaoke.entity.model.Lyric;
 import com.example.karaoke.entity.payload.response.SongResponse;
+import com.example.karaoke.entity.payload.response.dto.SongDTO;
 import com.example.karaoke.enums.SongStatus;
-import jakarta.persistence.*;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -141,5 +140,17 @@ public class Song {
             songResponses.add(song.songResponse());
         }
         return songResponses;
+    }
+
+    public SongDTO songDTO(){
+        return new SongDTO(this);
+    }
+
+    public static List<SongDTO> songDTOs(List<Song> songs){
+        List<SongDTO> songDTOs = new ArrayList<>();
+        for(Song song : songs){
+            songDTOs.add(song.songDTO());
+        }
+        return songDTOs;
     }
 }

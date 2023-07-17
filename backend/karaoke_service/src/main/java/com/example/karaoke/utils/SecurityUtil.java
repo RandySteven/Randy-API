@@ -1,10 +1,13 @@
 package com.example.karaoke.utils;
 
+import com.example.karaoke.entity.payload.request.GroupRequest;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class SecurityUtil {
@@ -72,6 +75,20 @@ public class SecurityUtil {
             e.printStackTrace();
         }
         return hashedPasswordStr;
+    }
+
+    public boolean checkGroupAccessToken(String groupToken){
+        return true;
+    }
+
+    public Map<String, Boolean> groupRequestValidation(GroupRequest groupRequest){
+        boolean groupNameValidation = true;
+        Map<String, Boolean> validationRequestMap = new HashMap<>();
+        if(groupRequest.getGroupName().length() < 3 && groupRequest.getGroupName().length() > 32) {
+            groupNameValidation = false;
+        }
+        validationRequestMap.put("groupName", groupNameValidation);
+        return validationRequestMap;
     }
 
 }

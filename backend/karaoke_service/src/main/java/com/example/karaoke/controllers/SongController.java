@@ -1,7 +1,9 @@
 package com.example.karaoke.controllers;
 
 import com.example.karaoke.entity.model.Song;
+import com.example.karaoke.entity.payload.request.LyricRequest;
 import com.example.karaoke.entity.payload.request.SongRequest;
+import com.example.karaoke.entity.payload.response.SongResponse;
 import com.example.karaoke.services.SongService;
 import com.example.karaoke.utils.ResponseUtil;
 import org.json.JSONObject;
@@ -26,6 +28,8 @@ public class SongController {
     private static final String GET_ALL_SONGS_ENDPOINT = "";
     private static final String GET_SONG_BY_GROUP_ID_ENDPOINT = "{groupId}";
     private static final String UPDATE_SONG_STATUS_BY_ID_ENDPOINT = "update-status/{id}";
+    private static final String ADD_LYRIC_BY_SONG_ID_ENDPOINT = "/add-lyric/{songId}";
+    private static final String GET_SONG_BY_SONG_ID_ENDPOINT = "song/{songId}";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SongController.class);
 
@@ -53,7 +57,7 @@ public class SongController {
         JSONObject responseJson = responseUtil.responseJSON(
                 HttpStatus.OK,
                 "songs",
-                Song.songResponses(songs),
+                Song.songDTOs(songs),
                 true
         );
         response = ResponseEntity.status(HttpStatus.OK).body(responseJson.toMap());
@@ -73,4 +77,31 @@ public class SongController {
         return response;
     }
 
+    @PatchMapping(ADD_LYRIC_BY_SONG_ID_ENDPOINT)
+    public ResponseEntity<Map<String, Object>> addLyricBySongId(@PathVariable String songId,
+                                                                @RequestBody LyricRequest lyricRequest){
+        Song song = songService.addLyricToSong(songId, lyricRequest);
+        JSONObject responseJson = responseUtil.responseJSON(
+                HttpStatus.OK,
+                "song",
+                song.songResponse(),
+                true
+        );
+        response = ResponseEntity.ok().body(responseJson.toMap());
+        return response;
+    }
+
+    @GetMapping(GET_SONG_BY_SONG_ID_ENDPOINT)
+    public ResponseEntity<Map<String, Object>> getSongBySongId(@PathVariable String songId){
+        Song song = songService.getSongBySongId(songId);
+        LOGGER.info("===== song lyric : " + song.getLyricMap());
+        JSONObject responseJson = responseUtil.responseJSON(
+                HttpStatus.OK,
+                "song",
+                new SongResponse(song),
+                true
+        );
+        response = ResponseEntity.ok().body(responseJson.toMap());
+        return response;
+    }
 }
