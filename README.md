@@ -21,6 +21,11 @@ It will includes `GET` & `POST` method
 ### Messages Services
 #### TBA
 
+##### Parameter Check
+|Field|dataType|M/O|Detail|
+|-----|--------|-|------|
+|message|string|M|minLength:3, maxLength : 32|
+
 Sample Request of POST message
 ```
 {
@@ -29,6 +34,13 @@ Sample Request of POST message
 ```
 
 Sample Response of POST message
+##### Parameter Check
+|Field|dataType|M/O|detail|
+|-----|--------|---|------|
+|responseCode|int|M||
+|responseMessage|string|M||
+|message|string|M|get from request|
+
 ```
 {
   "responseCode": 201,
