@@ -3,11 +3,14 @@ package com.example.karaoke.utils;
 import com.example.karaoke.enums.ServiceId;
 
 import java.util.Properties;
+import java.util.Random;
 
 public class VelocityUtil {
 
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String NUMBER = "0123456789";
+
+    private Random rand = new Random();
 
     Properties properties = new Properties();
 
@@ -45,4 +48,17 @@ public class VelocityUtil {
         return ServiceId.LYR.toString() + idGenerator();
     }
 
+    public String generateRandomName(){
+        String []animals = new String[]{
+                "PANDA",
+                "RACOON",
+                "OWL",
+                "PENGUIN",
+                "PUPPY",
+                "CAT",
+                "BUFFALO"
+        };
+        String animal = animals[(int)(Math.random()*animals.length)];
+        return animal + " " + rand.nextInt(100);
+    }
 }
