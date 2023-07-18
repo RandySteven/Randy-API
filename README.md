@@ -98,6 +98,43 @@ There will 2 entities
 |GET|{{url}}/randy-steven/v1.0/karaoke/groups/:groupId|
 |POST|{{url}}/randy-steven/v1.0/karaoke/groups/add-group|
 
+#### /randy-steven/v1.0/karaoke/group/add-group
+
+##### Parameter Check
+
+###### Request
+|Field|dataType|M/O|details|
+|-----|--------|---|-------|
+|groupName|string|M|the name of group min length 3 max length 32|
+|groupPassword|string|O|you can add password if you want|
+
+###### Response
+|Field|dataType|M/O|details|
+|-----|--------|---|-------|
+|responseCode|int|M|response code|
+|responseMessage|string|M|response message|
+|success|boolean|M|success to create the group|
+|groupAccessToken|string|M|group access token use SHA-512 using input groupName + groupPassword|
+
+
+###### Sample Request
+```
+{
+    "groupName":"",
+    "groupPassword": ""
+}
+```
+
+###### Sample Response
+```
+{
+    "success": true,
+    "groupAccessToken": "17d1111b91ba1691d01091d110017112816313d1e310b1991d11ea11e11a1fe1d81d11a71b01ad1a21f91131ad1a41431091f417e1cf1481cd1a619e1ff10c16816c1cd1421ab1071d412c1ff14110b11d1201ce11511a1ee12d14c16b1e11d4",
+    "responseMessage": "Created",
+    "responseCode": 201
+}
+```
+
 #### Song
 |Method|URL|
 |------|---|
