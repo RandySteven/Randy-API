@@ -58,3 +58,22 @@ Sample Response of GET messages
 
 ### Karaoke Services
 <p>Karaoke services is where you can put your own songs that you want to sing</p>
+There will 2 entities
+- Group
+- Song
+
+##### Group
+|Method|URL|
+|------|---|
+|GET|{{url}}/randy-steven/v1.0/karaoke/groups|
+|GET|{{url}}/randy-steven/v1.0/karaoke/groups/:groupId|
+|POST|{{url}}/randy-steven/v1.0/karaoke/groups/add-group|
+
+#### Song
+|Method|URL|
+|------|---|
+|GET|{{url}}/randy-steven/v1.0/karaoke/songs/:groupId|
+|POST|{{url}}/randy-steven/v1.0/karaoke/songs/insert-song|
+|PATCH|{{url}}/randy-steven/v1.0/karaoke/songs/:id|
+|PATCH|{{url}}/randy-steven/v1.0/karaoke/songs/add-lyric/:songId|
+|GET|{{url}}/randy-steven/v1.0/karaoke/songs/song/:songId|
