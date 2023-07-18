@@ -129,10 +129,10 @@ There will 2 entities
 ###### Sample Response
 ```
 {
-    "success": true,
-    "groupAccessToken": "17d1111b91ba1691d01091d110017112816313d1e310b1991d11ea11e11a1fe1d81d11a71b01ad1a21f91131ad1a41431091f417e1cf1481cd1a619e1ff10c16816c1cd1421ab1071d412c1ff14110b11d1201ce11511a1ee12d14c16b1e11d4",
     "responseMessage": "Created",
-    "responseCode": 201
+    "responseCode": 201,
+    "success": true,
+    "groupAccessToken": "17d1111b91ba1691d01091d110017112816313d1e310b1991d11ea11e11a1fe1d81d11a71b01ad1a21f91131ad1a41431091f417e1cf1481cd1a619e1ff10c16816c1cd1421ab1071d412c1ff14110b11d1201ce11511a1ee12d14c16b1e11d4"
 }
 ```
 
