@@ -21,6 +21,15 @@ It will includes `GET` & `POST` method
 ### Messages Services
 #### TBA
 
+#### Message Entity
+|Field|dataType|
+|-----|-------|
+|ID|int|
+|MessageId|string|
+|Message|string|
+|CreatedAt|Timestamp|
+|DeletedAt|Timestamp|
+
 ##### Parameter Check
 |Field|dataType|M/O|Detail|
 |-----|--------|-|------|
@@ -50,6 +59,14 @@ Sample Response of POST message
 ```
 
 Sample Response of GET messages
+#### Parameter Check
+
+|Field|dataType|M/O|details|
+|-----|--------|---|-------|
+|responseCode|int|M|response code|
+|responseMessage|string|M|response message|
+|messages|Array of object|M|list of messages|
+
 ```
 {
   "responseCode": 200,
