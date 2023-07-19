@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class SecurityUtil {
 
     public String groupAccessTokenEncryptionSHA512(String groupName){
         String accessToken = "";
-        String pass = groupName;
+        String pass = groupName + LocalDateTime.now().toString();
         int saltRange = 10;
         byte []salt = new byte[saltRange];
         try{
@@ -40,7 +41,7 @@ public class SecurityUtil {
 
     public String groupAccessTokenEncryptionSHA512(String groupName, String groupPassword){
         String accessToken = "";
-        String pass = groupName + groupPassword;
+        String pass = groupName + groupPassword + "" + LocalDateTime.now().toString();
         int saltRange = groupPassword.length();
         SecureRandom secureRandom = new SecureRandom();
         byte []salt = new byte[saltRange];
@@ -89,6 +90,10 @@ public class SecurityUtil {
         }
         validationRequestMap.put("groupName", groupNameValidation);
         return validationRequestMap;
+    }
+
+    public String groupAccessTokenDecryptionSHA512(String groupAccessToken){
+        return "";
     }
 
 }
