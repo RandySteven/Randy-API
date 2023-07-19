@@ -27,6 +27,11 @@ public class GroupServiceImpl implements GroupService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupServiceImpl.class);
 
+    /**
+     *
+     * @param groupRequest
+     * @return
+     */
     @Override
     public String addNewGroup(GroupRequest groupRequest) {
         LOGGER.info("=== Group Request : {}", JSONObject.wrap(groupRequest));
@@ -61,9 +66,17 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public List<Group> getAllGroups() {
         List<Group> groups = groupRepository.findAll();
+        if(groups.isEmpty()){
+            return null;
+        }
         return groups;
     }
 
+    /**
+     *
+     * @param groupId
+     * @return
+     */
     @Override
     public Group getGroupByGroupId(String groupId) {
 //        List<Group> groups = getAllGroups();
@@ -109,5 +122,6 @@ public class GroupServiceImpl implements GroupService {
     public void deleteGroupByGroupId(String groupId){
         Group group = getGroupByGroupId(groupId);
         group.setDeletedAt(LocalDateTime.now());
+        groupRepository.saveAndFlush(group);
     }
 }
