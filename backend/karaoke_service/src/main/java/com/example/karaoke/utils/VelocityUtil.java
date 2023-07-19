@@ -1,6 +1,9 @@
 package com.example.karaoke.utils;
 
 import com.example.karaoke.enums.ServiceId;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 import java.util.Properties;
 import java.util.Random;
@@ -14,6 +17,8 @@ public class VelocityUtil {
 
     Properties properties = new Properties();
 
+    @Autowired
+    Environment env;
     public VelocityUtil(){
 
     }
@@ -33,7 +38,7 @@ public class VelocityUtil {
     }
 
     public Object p(String key){
-        return properties.getProperty(key);
+        return env.getProperty(key);
     }
 
     public String groupId(){
@@ -60,5 +65,21 @@ public class VelocityUtil {
         };
         String animal = animals[(int)(Math.random()*animals.length)];
         return animal + " " + rand.nextInt(100);
+    }
+
+    public String generateNumberDigits(int len){
+        String numberDigits = "01234567890";
+        Random random = new Random();
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0 ; i < len ; i++){
+            char numberDigit = numberDigits.charAt(random.nextInt(10));
+            builder.append(numberDigit);
+        }
+        return builder.toString();
+    }
+
+    public String jsonToJsonString(Object object){
+        JSONObject json = new JSONObject(object);
+        return json.toString();
     }
 }

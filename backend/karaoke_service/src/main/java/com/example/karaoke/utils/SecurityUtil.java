@@ -21,7 +21,7 @@ public class SecurityUtil {
 
     public String groupAccessTokenEncryptionSHA512(String groupName){
         String accessToken = "";
-        String pass = groupName + LocalDateTime.now().toString();
+        String pass = groupName;
         int saltRange = 10;
         byte []salt = new byte[saltRange];
         try{
@@ -41,7 +41,7 @@ public class SecurityUtil {
 
     public String groupAccessTokenEncryptionSHA512(String groupName, String groupPassword){
         String accessToken = "";
-        String pass = groupName + groupPassword + "" + LocalDateTime.now().toString();
+        String pass = groupName + groupPassword;
         int saltRange = groupPassword.length();
         SecureRandom secureRandom = new SecureRandom();
         byte []salt = new byte[saltRange];
@@ -85,7 +85,7 @@ public class SecurityUtil {
     public Map<String, Boolean> groupRequestValidation(GroupRequest groupRequest){
         boolean groupNameValidation = true;
         Map<String, Boolean> validationRequestMap = new HashMap<>();
-        if(groupRequest.getGroupName().length() < 3 && groupRequest.getGroupName().length() > 32) {
+        if(groupRequest.getGroupName().length() < 3 || groupRequest.getGroupName().length() > 32) {
             groupNameValidation = false;
         }
         validationRequestMap.put("groupName", groupNameValidation);

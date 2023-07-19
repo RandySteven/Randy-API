@@ -43,6 +43,12 @@ public class GroupController {
 
     ResponseEntity<Map<String, Object>> responseEntity;
 
+    /**
+     * @CreatedBy <b>RandySteven</b>
+     * @param groupRequest
+     * @return responseEntity
+     * @PostMapping(ADD_GROUP_ENDPOINT)
+     */
     @PostMapping(ADD_GROUP_ENDPOINT)
     public ResponseEntity addNewGroup(@RequestBody GroupRequest groupRequest) {
         String groupAccessToken = groupService.addNewGroup(groupRequest);
@@ -62,14 +68,20 @@ public class GroupController {
         return responseEntity;
     }
 
+    /**
+     * @GetMapping(GET_ALL_GROUPS_ENDPOINT)
+     * @return
+     */
     @GetMapping(GET_ALL_GROUPS_ENDPOINT)
     public ResponseEntity getAllGroups(){
         List<Group> groups = groupService.getAllGroups();
         List<GroupDTO> groupDTOS = new ArrayList<>();
         for (Group group : groups){
-            groupDTOS.add(group.groupDTO());
+            if(group.getDeletedAt() == null)
+                groupDTOS.add(group.groupDTO());
         }
         JSONObject response = responseUtil.responseJSON(HttpStatus.OK, "groups", groupDTOS, true);
+        response.put("totalGroup", groupDTOS.size());
         responseEntity = ResponseEntity.status(HttpStatus.OK).body(response.toMap());
         return responseEntity;
     }
