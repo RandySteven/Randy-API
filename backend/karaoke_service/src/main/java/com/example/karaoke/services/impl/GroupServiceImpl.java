@@ -105,4 +105,9 @@ public class GroupServiceImpl implements GroupService {
         return null;
     }
 
+    @Override
+    public void deleteGroupByGroupId(String groupId){
+        Group group = getGroupByGroupId(groupId);
+        group.setDeletedAt(LocalDateTime.now());
+    }
 }

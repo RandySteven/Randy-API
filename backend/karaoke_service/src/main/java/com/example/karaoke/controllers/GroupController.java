@@ -3,6 +3,7 @@ package com.example.karaoke.controllers;
 import com.example.karaoke.entity.model.Group;
 import com.example.karaoke.entity.model.Song;
 import com.example.karaoke.entity.payload.request.GroupRequest;
+import com.example.karaoke.entity.payload.request.GroupTokenRequest;
 import com.example.karaoke.entity.payload.response.GroupResponse;
 import com.example.karaoke.entity.payload.response.dto.GroupDTO;
 import com.example.karaoke.services.GroupService;
@@ -33,6 +34,8 @@ public class GroupController {
     private static final String ADD_GROUP_ENDPOINT = "add-group";
     private static final String GET_ALL_GROUPS_ENDPOINT = "/";
     private static final String GET_GROUP_BY_GROUP_ID_ENDPOINT = "/{groupId}";
+    private static final String GET_GROUP_BY_GROUP_TOKEN_ENDPOINT = "/validate";
+    private static final String DELETE_GROUP_BY_GROUP_ID_ENDPOINT = "/delete-group/{groupId}";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupController.class);
 
@@ -49,7 +52,7 @@ public class GroupController {
         Object dataItem = null;
         boolean success = false;
         if(groupAccessToken != ""){
-            status = HttpStatus.OK;
+            status = HttpStatus.CREATED;
             dataName = "groupAccessToken";
             dataItem = groupAccessToken;
             success = true;
@@ -92,4 +95,36 @@ public class GroupController {
         return responseEntity;
     }
 
+    @GetMapping(GET_GROUP_BY_GROUP_TOKEN_ENDPOINT)
+    public ResponseEntity getGroupByGroupToken(@RequestBody GroupTokenRequest groupTokenRequest){
+        String groupToken = groupTokenRequest.getGroupToken();
+        LOGGER.info("======== groupToken : " + groupToken);
+        Group group = groupService.getGroupByGroupToken(groupToken);
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        String dataName = null;
+        boolean success = false;
+        Object dataItem = null;
+        if(group != null){
+            status = HttpStatus.OK;
+            success = true;
+            dataName = "group";
+            dataItem = group;
+        }
+        JSONObject response = responseUtil.responseJSON(status, dataName, dataItem, success);
+        responseEntity = ResponseEntity.status(status).body(response.toMap());
+        return responseEntity;
+    }
+
+    @DeleteMapping(DELETE_GROUP_BY_GROUP_ID_ENDPOINT)
+    public ResponseEntity deleteGroupByGroupId(@PathVariable String groupId){
+        groupService.deleteGroupByGroupId(groupId);
+        JSONObject response = responseUtil.responseJSON(
+                HttpStatus.OK,
+                "message",
+                "success deleted",
+                true
+        );
+        responseEntity = ResponseEntity.ok().body(response.toMap());
+        return responseEntity;
+    }
 }

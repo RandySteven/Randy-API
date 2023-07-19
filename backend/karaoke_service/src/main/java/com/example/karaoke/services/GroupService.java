@@ -10,4 +10,5 @@ public interface GroupService {
     List<Group> getAllGroups();
     Group getGroupByGroupId(String groupId);
     Group getGroupByGroupToken(String groupToken);
+    void deleteGroupByGroupId(String groupId);
 }
