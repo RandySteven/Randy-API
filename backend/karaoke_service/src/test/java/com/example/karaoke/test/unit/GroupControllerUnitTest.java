@@ -26,6 +26,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * <h2>Group Service Unit Test</h2>
+ * @author : <b>randy.steven</b>
+ * @description :
+ * <p>Test the group service unit test function.</p>
+ */
 @TestPropertySource(locations = "classpath:application.properties")
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
@@ -44,6 +50,15 @@ public class GroupControllerUnitTest {
 
     private VelocityUtil vu = VelocityUtil.getInstance();
 
+    /**
+     * <h3>Test Add Group Normal Scenario</h3>
+     * @throws Exception
+     * @author <b>Randy Steven</b>
+     * @description
+     * <p>Happy path to add group scenario, with request groupName only
+     * {"groupName":""}
+     * </p>
+     */
     @Test
     public void addGroupTest() throws Exception {
         GroupRequest request = new GroupRequest();
