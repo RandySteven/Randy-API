@@ -38,7 +38,7 @@ public class VelocityUtil {
     }
 
     public Object p(String key){
-        return env.getProperty(key);
+        return properties.get(key);
     }
 
     public String groupId(){
