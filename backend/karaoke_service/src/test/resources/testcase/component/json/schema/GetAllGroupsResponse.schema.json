@@ -1,0 +1,52 @@
+{
+  "$id": "https://example.com/GroupResponse.schema.json",
+  "description": "All Groups Schema Json",
+  "examples": [
+    {
+      "responseCode": 200,
+      "responseMessage": "OK",
+      "success": true,
+      "totalGroup": 2,
+      "groups": [
+        {
+          "groupName": "Elmore City",
+          "groupUrl": "http://localhost:8080/randy-steven/v1.0/karaoke/groups/GRP4QC2DGSL120Z30GK"
+        }
+      ]
+    }
+  ],
+  "type": "object",
+  "required": [
+    "responseCode",
+    "responseMessage",
+    "success",
+    "totalGroup",
+    "groups"
+  ],
+  "properties": {
+    "responseCode": {
+      "type": "integer"
+    },
+    "responseMessage": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "totalGroup": {
+      "type": "integer"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "groupName": {
+          "type": "string"
+        },
+        "groupUrl": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}
