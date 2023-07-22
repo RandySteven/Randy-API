@@ -15,6 +15,12 @@ type IUser interface {
 	GetUserId() string
 	GetUserPassword() string
 	GetUserStatus() string
+
+	SetUserName(userName string)
+	SetUserEmail(userEmail string)
+	SetUserId(userId string)
+	SetUserPassword(userPassword string)
+	SetUserStatus(userStatus string)
 }
 
 func (u *User) GetUserName() string {
@@ -35,4 +41,24 @@ func (u *User) GetUserPassword() string {
 
 func (u *User) GetUserStatus() string {
 	return u.UserStatus
+}
+
+func (u *User) SetUserName(userName string) {
+	u.UserName = userName
+}
+
+func (u *User) SetUserEmail(userEmail string) {
+	u.UserEmail = userEmail
+}
+
+func (u *User) SetUserPassword(userPassword string) {
+	u.UserPassword = userPassword
+}
+
+func (u *User) SetUserStatus(userStatus string) {
+	u.UserStatus = userStatus
+}
+
+func (u *User) SetUserId(userId string) {
+	u.UserId = userId
 }
