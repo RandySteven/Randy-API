@@ -32,4 +32,8 @@ public class GroupApiAction extends CommonApiAction {
         return response;
     }
 
+    public HttpResponse getAllGroupsApiAction(){
+        return null;
+    }
+
 }

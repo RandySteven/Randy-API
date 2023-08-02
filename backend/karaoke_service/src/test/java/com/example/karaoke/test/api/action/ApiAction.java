@@ -1,6 +1,7 @@
 package com.example.karaoke.test.api.action;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
@@ -51,6 +52,13 @@ public abstract class ApiAction {
         return post;
     }
 
+    protected HttpGet get(String endpoint) {
+        String url = API_HOST + endpoint;
+        LOGGER.info("==== url : " + url);
+        HttpGet get = new HttpGet(url);
+        return get;
+    }
+
     protected String createRequestBody(String jsonPath, Map<String, Object> contextOverwrite) throws FileSystemNotFoundException,
             FileNotFoundException, IOException {
         String requestBodyJson = new String(Files.readAllBytes(Paths.get(jsonPath)));
@@ -68,6 +76,6 @@ public abstract class ApiAction {
 
     public abstract HttpResponse post(String endpoint, Map<String, String> requestHeader, Map<String, String> requestBody);
 
-    public abstract HttpResponse get();
+    public abstract HttpResponse get(String endpoint, Map<String, String> requestHeader);
 
 }

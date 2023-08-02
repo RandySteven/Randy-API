@@ -26,6 +26,7 @@ public class GroupApiTest {
 
     @Test
     public void addGroupApiTest() throws Exception{
+        LOGGER.info("============== Add Group API Test ==============");
         Map<String, Object> requestBodyRewrite = new HashMap<>();
         Faker faker = new Faker();
         String groupName = faker.name().fullName();
